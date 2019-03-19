@@ -1,5 +1,5 @@
 // ------------------------------------
-// All tests below expect a function 
+// All tests below expect a function
 // called `fn` which takes a single
 // parameter `input` and returns
 // `output`.
@@ -32,12 +32,20 @@ describe('tests', () => {
         const input = ['one', 'two', 'three'];
         const output = ['ONE', 'TWO', 'THREE'];
 
+        const toUpper = (input) => input.toUpperCase();
+        const fn = (input) => input.map(toUpper)
+
         expect(fn(input)).toEqual(output);
     });
 
     it('002 / an array of things, prefixed with their index + 1 and a dash', () => {
         const input = ['one', 'two', 'three'];
         const output = ['1-one', '2-two', '3-three'];
+
+        const fn = (input) => input.map((item, index) => `${(index +1 )}-${item}`)
+        // const fn = (input) => input.keys(vits => input.map(vits => vits +1))
+
+
 
         expect(fn(input)).toEqual(output);
     });
@@ -56,6 +64,8 @@ describe('tests', () => {
             'Berocca Orange - 45 effervescent tablets',
             'JT Vits Re-Energise Orange 20 tablets',
         ];
+
+        const fn = (input ) => input.map(vits => vits.name);
 
         expect(fn(input)).toEqual(output);
     });
@@ -77,6 +87,12 @@ describe('tests', () => {
             ]
         }
 
+        const fn = (items) => {
+            return { products: items }
+        }
+        // // or
+        // const fn = (items) => ({products: items})
+
         expect(fn(input)).toEqual(output);
     });
 
@@ -97,6 +113,10 @@ describe('tests', () => {
             ]
         }
 
+        const fn = (input) => {
+            return {products: input.map(vits => vits.name)}
+        }
+
         expect(fn(input)).toEqual(output);
     });
 
@@ -115,6 +135,12 @@ describe('tests', () => {
                 { id: 'p003', name: 'Berocca Orange - 45 effervescent tablets', inStock: true },
                 { id: 'p004', name: 'JT Vits Re-Energise Orange 20 tablets', inStock: true },
             ]
+        }
+
+        const fn = (input) => {
+            return {
+                products: input.map(vits => ({...vits, inStock: true}))
+            }
         }
 
         expect(fn(input)).toEqual(output);
